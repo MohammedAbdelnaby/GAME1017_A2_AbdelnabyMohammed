@@ -1,7 +1,8 @@
 #include "Player.h"
 #include "TextureManager.h"
+#include <algorithm>
 
-Player::Player(): m_currentAnimationState(PLAYER_IDLE_RIGHT)
+Player::Player()
 {
 	TextureManager::Instance()->loadSpriteSheet(
 		"../Assets/sprites/atlas.txt",
@@ -20,8 +21,11 @@ Player::Player(): m_currentAnimationState(PLAYER_IDLE_RIGHT)
 	getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->isColliding = false;
+	m_currentDirection = glm::vec2(1.0f, 1.0f);
+	m_maxSpeed = 7;
+	m_direction = 0;
 	setType(PLAYER);
-
+	setAnimationState(PLAYER_RUN_RIGHT);
 	m_buildAnimations();
 }
 
@@ -61,15 +65,62 @@ void Player::draw()
 
 void Player::update()
 {
+	UpdateGravity();
+	//PlayerJump();
+}
+
+void Player::UpdateGravity()
+{
+	getRigidBody()->velocity.y += getRigidBody()->acceleration.y + gravity * 0.075;
+	getRigidBody()->velocity.y = std::min(std::max(getRigidBody()->velocity.y, force), gravity);
+	getTransform()->position.y += getRigidBody()->velocity.y;
+	getRigidBody()->acceleration.y = 0.0f;
 }
 
 void Player::clean()
 {
 }
 
+void Player::move()
+{
+	getRigidBody()->velocity.x = m_currentDirection.x * m_maxSpeed;
+	getTransform()->position.x += getRigidBody()->velocity.x;
+}
+
 void Player::setAnimationState(const PlayerAnimationState new_state)
 {
 	m_currentAnimationState = new_state;
+}
+
+void Player::setCurrentDirection(glm::vec2 newDirection)
+{
+	m_currentDirection = newDirection;
+}
+
+glm::vec2 Player::getCurrentDirection()
+{
+	return m_currentDirection;
+}
+
+void Player::setisGorunded(bool grounded)
+{
+	isGrounded = grounded;
+}
+
+bool Player::getisGrounded()
+{
+	return isGrounded;
+}
+
+void Player::PlayerJump()
+{
+	int cooldown = 0;
+	do
+	{
+		getTransform()->position.y -= 2.0f;
+		cooldown++;
+	} while (cooldown != 100);
+
 }
 
 void Player::m_buildAnimations()
