@@ -28,9 +28,15 @@ void PlayScene::draw()
 
 void PlayScene::update()
 {
-	updateDisplayList();
-	m_objectScrolling();
+	if (m_pPauseScene->getIsPaused())
+	{
+		m_pPauseScene->update();
+		return;
+	}
+	TimerCounter();
 	m_ObstacleScrolling();
+	m_objectScrolling();
+	updateDisplayList();
 	m_CollisionUpdate();
 	m_BackgroundScroll();
 	m_ForegroundScroll();
@@ -48,6 +54,7 @@ void PlayScene::update()
 			m_pPlayer->setisGorunded(false);
 		}
 	}
+	cooldown--;
 }
 
 void PlayScene::clean()
@@ -62,7 +69,20 @@ void PlayScene::handleEvents()
 
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
-		TheGame::Instance()->quit();
+		if (cooldown <= 0)
+		{
+			if (m_pPauseScene->getIsPaused())
+			{
+				std::cout << " NOT Paused" << std::endl;
+				m_pPauseScene->setIsPaused(false);
+			}
+			else
+			{
+				std::cout << "Paused" << std::endl;
+				m_pPauseScene->setIsPaused(true);
+			}
+			cooldown = 40;
+		}
 	}
 
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_A))
@@ -129,6 +149,12 @@ void PlayScene::start()
 	m_pPlayer->getTransform()->position = glm::vec2(300.0, 100.0);
 	addChild(m_pPlayer);
 
+	m_pPauseScene = new PauseScene();
+	addChild(m_pPauseScene);
+
+	const SDL_Color colour = { 0,0,0,255 };
+	m_pTimer = new Label("", "Consolas", 20, colour, glm::vec2(700.0f, 20.0f));
+	addChild(m_pTimer);
 }
 
 void PlayScene::m_objectScrolling()
@@ -222,6 +248,15 @@ void PlayScene::m_ForegroundScroll()
 		std::cout << randomNumber << std::endl;
 		m_pForeground2->setForeground(randomNumber);
 		m_pForeground2->getTransform()->position.x = m_pForeground2->getWidth() + 400;
+	}
+}
+
+void PlayScene::TimerCounter()
+{
+	if (TheGame::Instance()->getFrames() % 60 == 0)
+	{
+		m_TimerCounter++;
+		m_pTimer->setText("Time: " + std::to_string(m_TimerCounter));
 	}
 }
 
