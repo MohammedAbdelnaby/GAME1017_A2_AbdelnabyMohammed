@@ -46,6 +46,7 @@ void PlayScene::update()
 		}
 
 	}
+	cooldown--;
 }
 
 void PlayScene::clean()
@@ -121,15 +122,15 @@ void PlayScene::m_ObstacleScrolling()
 		m_pObstacle = new Obstacle(1 + rand() % 3);
 		if (m_pObstacle->getRandomPiller() == 1)
 		{
-			m_pObstacle->getTransform()->position = glm::vec2(1000.0f, 200.0f);
+			m_pObstacle->getTransform()->position = glm::vec2(950.0f, 0.0f);
 		}
 		if (m_pObstacle->getRandomPiller() == 2)
 		{
-			m_pObstacle->getTransform()->position = glm::vec2(1000.0f, 550.0f);
+			m_pObstacle->getTransform()->position = glm::vec2(950.0f, 475.0f);
 		}
 		if (m_pObstacle->getRandomPiller() == 3)
 		{
-			m_pObstacle->getTransform()->position = glm::vec2(1000.0f, 300.0f);
+			m_pObstacle->getTransform()->position = glm::vec2(950.0f, 125.0f);
 		}
 		addChild(m_pObstacle);
 	}

@@ -38,7 +38,7 @@ private:
 	Background* m_pBackground1;
 	Ground* m_pGround[2];
 	Player* m_pPlayer;
-
+	int cooldown = 40;
 };
 
 #endif /* defined (__PLAY_SCENE__) */
