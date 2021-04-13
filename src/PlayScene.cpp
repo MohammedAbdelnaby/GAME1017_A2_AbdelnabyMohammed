@@ -92,7 +92,7 @@ void PlayScene::start()
 	m_pGround[0] = new Ground();
 	m_pGround[0]->getTransform()->position = glm::vec2(0.0f, 505.0f);
 	addChild(m_pGround[0]);
-
+	//test
 	m_pGround[1] = new Ground();
 	m_pGround[1]->getTransform()->position = glm::vec2(800.0f, 505.0f);
 	addChild(m_pGround[1]);
