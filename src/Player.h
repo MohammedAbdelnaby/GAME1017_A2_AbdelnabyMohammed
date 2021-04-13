@@ -24,6 +24,8 @@ public:
 	void setisGorunded(bool grounded);
 	bool getisGrounded();
 	void PlayerJump();
+	float getAngel();
+	void setAngle(float x);
 private:
 	void m_buildAnimations();
 
