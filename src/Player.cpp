@@ -43,19 +43,19 @@ void Player::draw()
 	{
 	case PLAYER_IDLE_RIGHT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("idle"),
-			x, y, 0.12f, 0, 255, true);
+			x, y, 0.12f, 0, 255, false);
 		break;
 	case PLAYER_IDLE_LEFT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("idle"),
-			x, y, 0.12f, 0, 255, true, SDL_FLIP_HORIZONTAL);
+			x, y, 0.12f, 0, 255, false, SDL_FLIP_HORIZONTAL);
 		break;
 	case PLAYER_RUN_RIGHT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("run"),
-			x, y, 0.25f, 0, 255, true);
+			x, y, 0.25f, 0, 255, false);
 		break;
 	case PLAYER_RUN_LEFT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("run"),
-			x, y, 0.25f, 0, 255, true, SDL_FLIP_HORIZONTAL);
+			x, y, 0.25f, 0, 255, false, SDL_FLIP_HORIZONTAL);
 		break;
 	default:
 		break;
@@ -117,9 +117,9 @@ void Player::PlayerJump()
 	int cooldown = 0;
 	do
 	{
-		getTransform()->position.y -= 2.0f;
+		getTransform()->position.y -= 0.30f;
 		cooldown++;
-	} while (cooldown != 100);
+	} while (cooldown != 1000);
 
 }
 

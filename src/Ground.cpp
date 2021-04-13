@@ -14,7 +14,7 @@ Ground::~Ground()
 
 void Ground::draw()
 {
-	TextureManager::Instance()->draw("ground", getTransform()->position.x, getTransform()->position.y, 0, 255, true);
+	TextureManager::Instance()->draw("ground", getTransform()->position.x, getTransform()->position.y, 0, 255, false);
 }
 
 void Ground::update()

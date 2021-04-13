@@ -30,14 +30,15 @@ void PlayScene::update()
 {
 	updateDisplayList();
 	m_objectScrolling();
+	m_ObstacleScrolling();
+	m_CollisionUpdate();
 	for (int i = 0; i < 2; i++)
 	{
 		if (int(m_pPlayer->getTransform()->position.y + m_pPlayer->getHeight() - m_pPlayer->getRigidBody()->velocity.y) >= m_pGround[i]->getTransform()->position.y)
 		{
 			m_pPlayer->getRigidBody()->velocity.y = 0.0f;
-			m_pPlayer->getTransform()->position.y = m_pGround[i]->getTransform()->position.y - m_pPlayer->getHeight();
+			m_pPlayer->getTransform()->position.y = m_pGround[i]->getTransform()->position.y - m_pPlayer->getHeight() + m_pPlayer->getHeight()/2;
 			m_pPlayer->setisGorunded(true);
-			std::cout << "yes";
 		}
 		else
 		{
@@ -72,7 +73,7 @@ void PlayScene::handleEvents()
 		m_pPlayer->move();
 		m_pPlayer->setCurrentDirection(glm::vec2(1.0f, m_pPlayer->getCurrentDirection().y));
 	}
-	else if (EventManager::Instance().isKeyDown(SDL_SCANCODE_SPACE) && m_pPlayer->getisGrounded())
+	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_SPACE) && m_pPlayer->getisGrounded())
 	{
 		m_pPlayer->PlayerJump();
 	}
@@ -88,30 +89,77 @@ void PlayScene::start()
 	addChild(m_pBackground1);
 
 	m_pGround[0] = new Ground();
-	m_pGround[0]->getTransform()->position = glm::vec2(400.0f, 555.0f);
+	m_pGround[0]->getTransform()->position = glm::vec2(0.0f, 505.0f);
 	addChild(m_pGround[0]);
 
 	m_pGround[1] = new Ground();
-	m_pGround[1]->getTransform()->position = glm::vec2(1200.0f, 555.0f);
+	m_pGround[1]->getTransform()->position = glm::vec2(800.0f, 505.0f);
 	addChild(m_pGround[1]);
 
 	m_pPlayer = new Player();
 	m_pPlayer->getTransform()->position = glm::vec2(300.0, 100.0);
 	addChild(m_pPlayer);
 
-	m_pObstacle = new Obstacle();
-	addChild(m_pObstacle);
 }
 
 void PlayScene::m_objectScrolling()
 {
 	m_pGround[0]->getTransform()->position.x -= 5;
 	m_pGround[1]->getTransform()->position.x -= 5;
-	if (m_pGround[0]->getTransform()->position.x <= -(m_pGround[0]->getWidth() / 2))
+	if (m_pGround[0]->getTransform()->position.x <= -m_pGround[0]->getWidth())
 	{
-		m_pGround[0]->getTransform()->position.x = 400;
-		m_pGround[1]->getTransform()->position.x = 1200;
+		m_pGround[0]->getTransform()->position.x = 0;
+		m_pGround[1]->getTransform()->position.x = 800;
 	}
+}
+
+void PlayScene::m_ObstacleScrolling()
+{
+	srand((unsigned)time(NULL));
+	if (m_pObstacle == nullptr)
+	{
+		m_pObstacle = new Obstacle(1 + rand() % 3);
+		if (m_pObstacle->getRandomPiller() == 1)
+		{
+			m_pObstacle->getTransform()->position = glm::vec2(1000.0f, 200.0f);
+		}
+		if (m_pObstacle->getRandomPiller() == 2)
+		{
+			m_pObstacle->getTransform()->position = glm::vec2(1000.0f, 550.0f);
+		}
+		if (m_pObstacle->getRandomPiller() == 3)
+		{
+			m_pObstacle->getTransform()->position = glm::vec2(1000.0f, 300.0f);
+		}
+		addChild(m_pObstacle);
+	}
+	if (m_pObstacle != nullptr)
+	{
+		m_pObstacle->getTransform()->position.x -= 5;
+	}
+
+	if (m_pObstacle != nullptr)
+	{
+		if (m_pObstacle->getTransform()->position.x <= -m_pObstacle->getWidth())
+		{
+			removeChild(m_pObstacle);
+			m_pObstacle = nullptr;
+			delete m_pObstacle;
+		}
+	}
+}
+
+void PlayScene::m_CollisionUpdate()
+{
+	if (m_pObstacle != nullptr)
+	{
+		if (CollisionManager::AABBCheck(m_pPlayer, m_pObstacle))
+		{
+			//TheGame::Instance()->changeSceneState(END_SCENE);
+			std::cout << "yes";
+		}
+	}
+
 }
 
 void PlayScene::GUI_Function() const

@@ -10,6 +10,8 @@
 #include "BackRound.h"
 #include "Ground.h"
 #include "Obstacle.h"
+#include <time.h>
+#include "CollisionManager.h"
 
 class PlayScene : public Scene
 {
@@ -24,6 +26,8 @@ public:
 	virtual void handleEvents() override;
 	virtual void start() override;
 	void m_objectScrolling();
+	void m_ObstacleScrolling();
+	void m_CollisionUpdate();
 private:
 	// IMGUI Function
 	void GUI_Function() const;
