@@ -35,7 +35,7 @@ private:
 	bool m_isMoving;
 	bool m_direction;
 	float m_maxSpeed;
-	bool isGrounded;
+	bool isGrounded = true;
 	float force = -100.0f;
 	float gravity = 12.0f;
 };

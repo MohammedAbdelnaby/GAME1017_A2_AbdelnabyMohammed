@@ -2,6 +2,8 @@
 #ifndef __PLAY_SCENE__
 #define __PLAY_SCENE__
 
+#include "time.h"
+
 #include "Scene.h"
 #include "Plane.h"
 #include "Player.h"
@@ -12,6 +14,8 @@
 #include "Obstacle.h"
 #include <time.h>
 #include "CollisionManager.h"
+#include "ForeGround.h"
+#include "Moon.h"
 
 class PlayScene : public Scene
 {
@@ -28,6 +32,8 @@ public:
 	void m_objectScrolling();
 	void m_ObstacleScrolling();
 	void m_CollisionUpdate();
+	void m_BackgroundScroll();
+	void m_ForegroundScroll();
 private:
 	// IMGUI Function
 	void GUI_Function() const;
@@ -36,9 +42,16 @@ private:
 	Obstacle* m_pObstacle;
 	glm::vec2 m_mousePosition;
 	Background* m_pBackground1;
+	Background* m_pBackground2;
+	Foreground* m_pForeground1;
+	Foreground* m_pForeground2;
+	Moon* m_pMoon;
 	Ground* m_pGround[2];
 	Player* m_pPlayer;
-
+	
+	float JumpHeight;
+	int cooldown = 0;
+	int randomNumber;
 };
 
 #endif /* defined (__PLAY_SCENE__) */

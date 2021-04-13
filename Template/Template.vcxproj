@@ -164,7 +164,9 @@
     <ClCompile Include="..\src\BackRound.cpp" />
     <ClCompile Include="..\src\Button.cpp" />
     <ClCompile Include="..\src\CollisionManager.cpp" />
+    <ClCompile Include="..\src\ForeGround.cpp" />
     <ClCompile Include="..\src\Ground.cpp" />
+    <ClCompile Include="..\src\Moon.cpp" />
     <ClCompile Include="..\src\Obstacle.cpp" />
     <ClCompile Include="..\src\Sprite.cpp" />
     <ClCompile Include="..\src\UIControl.cpp" />
@@ -204,7 +206,9 @@
     <ClInclude Include="..\src\CollisionManager.h" />
     <ClInclude Include="..\src\CollisionShape.h" />
     <ClInclude Include="..\src\Config.h" />
+    <ClInclude Include="..\src\ForeGround.h" />
     <ClInclude Include="..\src\Ground.h" />
+    <ClInclude Include="..\src\Moon.h" />
     <ClInclude Include="..\src\Obstacle.h" />
     <ClInclude Include="..\src\SoundType.h" />
     <ClInclude Include="..\src\Sprite.h" />
