@@ -144,6 +144,9 @@
     <ClCompile Include="..\src\ExtraScroll.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Clouds.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\StartScene.h">
@@ -297,6 +300,9 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ExtraScroll.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Clouds.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
   </ItemGroup>

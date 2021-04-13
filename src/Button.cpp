@@ -2,7 +2,6 @@
 #include <utility>
 #include "TextureManager.h"
 
-
 /**
  * @brief Construct a new Button:: Button object
  * 
@@ -13,7 +12,7 @@
  * @param is_centered 
  */
 Button::Button(const std::string& image_path, std::string button_name, const GameObjectType type,
-               const glm::vec2 position, const bool is_centered):
+	const glm::vec2 position, const bool is_centered) :
 m_alpha(255), m_name(std::move(button_name)), m_isCentered(is_centered), m_active(true)
 {
 	TextureManager::Instance()->load(image_path,m_name);
