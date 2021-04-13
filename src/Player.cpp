@@ -2,7 +2,7 @@
 #include "TextureManager.h"
 #include <algorithm>
 
-Player::Player()
+Player::Player() : m_currentAngle(0)
 {
 	TextureManager::Instance()->loadSpriteSheet(
 		"../Assets/sprites/atlas.txt",
@@ -43,19 +43,24 @@ void Player::draw()
 	{
 	case PLAYER_IDLE_RIGHT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("idle"),
-			x, y, 0.12f, 0, 255, false);
+			x, y, 0.12f, m_currentAngle, 255, false);
 		break;
 	case PLAYER_IDLE_LEFT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("idle"),
-			x, y, 0.12f, 0, 255, false, SDL_FLIP_HORIZONTAL);
+			x, y, 0.12f, m_currentAngle, 255, false, SDL_FLIP_HORIZONTAL);
 		break;
 	case PLAYER_RUN_RIGHT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("run"),
-			x, y, 0.25f, 0, 255, false);
+			x, y, 0.25f, m_currentAngle, 255, false);
 		break;
 	case PLAYER_RUN_LEFT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("run"),
-			x, y, 0.25f, 0, 255, false, SDL_FLIP_HORIZONTAL);
+			x, y, 0.25f, m_currentAngle, 255, false, SDL_FLIP_HORIZONTAL);
+		break;
+	case PLAYER_IDLE_PRONE:
+		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("idle"),
+			x, y, 0.12f, m_currentAngle, 255, false);
+		setWidth(getWidth()/2);
 		break;
 	default:
 		break;
@@ -121,6 +126,16 @@ void Player::PlayerJump()
 		cooldown++;
 	} while (cooldown != 1000);
 
+}
+
+float Player::getAngel()
+{
+	return m_currentAngle;
+}
+
+void Player::setAngle(float x)
+{
+	m_currentAngle = x;
 }
 
 void Player::m_buildAnimations()
