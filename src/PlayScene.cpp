@@ -32,6 +32,9 @@ void PlayScene::update()
 	m_objectScrolling();
 	m_ObstacleScrolling();
 	m_CollisionUpdate();
+	m_BackgroundScroll();
+	m_ForegroundScroll();
+
 	for (int i = 0; i < 2; i++)
 	{
 		if (int(m_pPlayer->getTransform()->position.y + m_pPlayer->getHeight() - m_pPlayer->getRigidBody()->velocity.y) >= m_pGround[i]->getTransform()->position.y)
@@ -44,7 +47,6 @@ void PlayScene::update()
 		{
 			m_pPlayer->setisGorunded(false);
 		}
-
 	}
 	cooldown--;
 }
@@ -86,7 +88,7 @@ void PlayScene::handleEvents()
 		m_pPlayer->setAnimationState(PLAYER_RUN_RIGHT);
 	}
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_SPACE) && m_pPlayer->getisGrounded())
-	{
+	{ 
 		m_pPlayer->PlayerJump();
 	}
 }
@@ -97,8 +99,24 @@ void PlayScene::start()
 	m_guiTitle = "Play Scene";
 
 	m_pBackground1 = new Background();
-	m_pBackground1->getTransform()->position = glm::vec2(400.f, 250.0f);
+	m_pBackground1->getTransform()->position = glm::vec2(400.0f, 250.0f);
 	addChild(m_pBackground1);
+
+	m_pBackground2 = new Background();
+	m_pBackground2->getTransform()->position = glm::vec2(1200.0f, 250.0f);
+	addChild(m_pBackground2);
+
+	m_pMoon = new Moon();
+	m_pMoon->getTransform()->position = glm::vec2(400.0f, 230.0f);
+	addChild(m_pMoon);
+
+	m_pForeground1 = new Foreground();
+	m_pForeground1->getTransform()->position = glm::vec2(400.0f, 290.0f);
+	addChild(m_pForeground1);
+
+	m_pForeground2 = new Foreground();
+	m_pForeground2->getTransform()->position = glm::vec2(1200.0f, 290.0f);
+	addChild(m_pForeground2);
 
 	m_pGround[0] = new Ground();
 	m_pGround[0]->getTransform()->position = glm::vec2(0.0f, 505.0f);
@@ -171,7 +189,41 @@ void PlayScene::m_CollisionUpdate()
 			std::cout << "yes";
 		}
 	}
+}
 
+void PlayScene::m_BackgroundScroll()
+{
+	m_pBackground1->getTransform()->position.x -= 0.25f;
+	m_pBackground2->getTransform()->position.x -= 0.25f;
+
+	if (m_pBackground1->getTransform()->position.x <= -m_pBackground1->getWidth() + 400)
+		m_pBackground1->getTransform()->position.x = m_pBackground1->getWidth() + 400;
+
+	if (m_pBackground2->getTransform()->position.x <= -m_pBackground1->getWidth() + 400)
+		m_pBackground2->getTransform()->position.x = m_pBackground2->getWidth() + 400;
+}
+
+void PlayScene::m_ForegroundScroll()
+{
+	srand(unsigned(time(NULL)));
+
+	m_pForeground1->getTransform()->position.x -= 1.25f;
+	m_pForeground2->getTransform()->position.x -= 1.25f;
+
+	if (m_pForeground1->getTransform()->position.x <= -m_pForeground1->getWidth() + 400)
+	{
+		randomNumber = 1 + (rand() % 3);
+		std::cout << randomNumber << std::endl;
+		m_pForeground1->setForeground(randomNumber);
+		m_pForeground1->getTransform()->position.x = m_pForeground1->getWidth() + 400;
+	}
+	if (m_pForeground2->getTransform()->position.x <= -m_pForeground2->getWidth() + 400)
+	{
+		randomNumber = 1 + (rand() % 3);
+		std::cout << randomNumber << std::endl;
+		m_pForeground2->setForeground(randomNumber);
+		m_pForeground2->getTransform()->position.x = m_pForeground2->getWidth() + 400;
+	}
 }
 
 void PlayScene::GUI_Function() const

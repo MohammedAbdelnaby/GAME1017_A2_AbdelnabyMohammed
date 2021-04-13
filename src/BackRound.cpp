@@ -2,11 +2,11 @@
 
 Background::Background()
 {
-	TextureManager::Instance()->load("../Assets/textures/parallax-mountain-bg.png", "bg");
+	TextureManager::Instance()->load("../Assets/textures/Background.png", "bg");
 	auto size = TextureManager::Instance()->getTextureSize("bg");
 	setWidth(size.x);
 	setHeight(size.y);
-	getTransform()->position = glm::vec2(400.f, 300.0f);
+	//getTransform()->position = glm::vec2(800.0f, 300.0f);
 }
 
 Background::~Background()

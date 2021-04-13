@@ -24,6 +24,7 @@ Player::Player() : m_currentAngle(0)
 	m_currentDirection = glm::vec2(1.0f, 1.0f);
 	m_maxSpeed = 7;
 	m_direction = 0;
+	force = -18.0f;
 	setType(PLAYER);
 	setAnimationState(PLAYER_RUN_RIGHT);
 	m_buildAnimations();
@@ -119,12 +120,6 @@ bool Player::getisGrounded()
 
 void Player::PlayerJump()
 {
-	int cooldown = 0;
-	do
-	{
-		getTransform()->position.y -= 0.30f;
-		cooldown++;
-	} while (cooldown != 1000);
 
 }
 
