@@ -48,7 +48,6 @@ void PlayScene::update()
 			m_pPlayer->setisGorunded(false);
 		}
 	}
-	cooldown--;
 }
 
 void PlayScene::clean()

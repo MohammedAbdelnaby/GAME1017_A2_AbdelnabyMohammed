@@ -120,7 +120,12 @@ bool Player::getisGrounded()
 
 void Player::PlayerJump()
 {
-
+	int cooldown = 0;
+	do
+	{
+		getTransform()->position.y -= 2.0f;
+		cooldown++;
+	} while (cooldown != 100);
 }
 
 float Player::getAngel()
