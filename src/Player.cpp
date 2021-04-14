@@ -26,7 +26,7 @@ Player::Player() : m_currentAngle(0)
 	m_direction = 0;
 	force = -18.0f;
 	setType(PLAYER);
-	setAnimationState(PLAYER_IDLE_RIGHT);
+	setAnimationState(PLAYER_RUN_RIGHT);
 	m_buildAnimations();
 }
 
