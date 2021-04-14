@@ -1,0 +1,11 @@
+player-run-1 0 192 30 200
+player-run-2 32 192 30 200
+player-run-3 64 192 30 200
+player-run-4 96 192 30 200
+player-run-5 128 192 30 200
+player-run-6 160 192 30 200
+player-run-7 192 192 30 200
+player-run-8 224 192 30 200
+player-run-9 256 192 30 200
+player-slide-1 66 194 87 46
+player-slide-2 162 193 73 39
