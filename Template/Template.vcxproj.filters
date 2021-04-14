@@ -138,8 +138,19 @@
     <ClCompile Include="..\src\Moon.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\src\PauseScene.cpp">
       <Filter>Scenes</Filter>
+=======
+    <ClCompile Include="..\src\MidGround.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ExtraScroll.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Clouds.cpp">
+      <Filter>Game Objects</Filter>
+>>>>>>> Reubens_Branch
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,8 +301,19 @@
     <ClInclude Include="..\src\Moon.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\src\PauseScene.h">
       <Filter>Scenes</Filter>
+=======
+    <ClInclude Include="..\src\MidGround.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ExtraScroll.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Clouds.h">
+      <Filter>Game Objects</Filter>
+>>>>>>> Reubens_Branch
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

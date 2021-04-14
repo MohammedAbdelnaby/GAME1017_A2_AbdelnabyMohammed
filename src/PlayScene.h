@@ -17,6 +17,8 @@
 #include "ForeGround.h"
 #include "Moon.h"
 #include "PauseScene.h"
+#include "MidGround.h"
+#include "ExtraScroll.h"
 
 class PlayScene : public Scene
 {
@@ -35,6 +37,8 @@ public:
 	void m_CollisionUpdate();
 	void m_BackgroundScroll();
 	void m_ForegroundScroll();
+	void m_MidGroundScroll();
+	void m_ExtraScroll();
 	void TimerCounter();
 private:
 	// IMGUI Function
@@ -47,6 +51,10 @@ private:
 	Background* m_pBackground2;
 	Foreground* m_pForeground1;
 	Foreground* m_pForeground2;
+	MidGround* m_pMidGround1;
+	MidGround* m_pMidGround2;
+	ExtraScroll* m_pExtraScroll1;
+	ExtraScroll* m_pExtraScroll2;
 	Moon* m_pMoon;
 	Ground* m_pGround[2];
 	Player* m_pPlayer;

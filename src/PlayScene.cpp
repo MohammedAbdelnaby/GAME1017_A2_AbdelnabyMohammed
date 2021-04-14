@@ -40,6 +40,8 @@ void PlayScene::update()
 	m_CollisionUpdate();
 	m_BackgroundScroll();
 	m_ForegroundScroll();
+	m_MidGroundScroll();
+	m_ExtraScroll();
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -137,6 +139,22 @@ void PlayScene::start()
 	m_pForeground2->getTransform()->position = glm::vec2(1200.0f, 290.0f);
 	addChild(m_pForeground2);
 
+	m_pMidGround1 = new MidGround();
+	m_pMidGround1->getTransform()->position = glm::vec2(400.0f, 415.0f);
+	addChild(m_pMidGround1);
+
+	m_pMidGround2 = new MidGround();
+	m_pMidGround2->getTransform()->position = glm::vec2(1200.0f, 415.0f);
+	addChild(m_pMidGround2);
+
+	m_pExtraScroll1 = new ExtraScroll();
+	m_pExtraScroll1->getTransform()->position = glm::vec2(400.0f, 415.0f);
+	addChild(m_pExtraScroll1);
+
+	m_pExtraScroll2 = new ExtraScroll();
+	m_pExtraScroll2->getTransform()->position = glm::vec2(1200.0f, 415.0f);
+	addChild(m_pExtraScroll2);
+
 	m_pGround[0] = new Ground();
 	m_pGround[0]->getTransform()->position = glm::vec2(0.0f, 505.0f);
 	addChild(m_pGround[0]);
@@ -224,7 +242,7 @@ void PlayScene::m_BackgroundScroll()
 	if (m_pBackground1->getTransform()->position.x <= -m_pBackground1->getWidth() + 400)
 		m_pBackground1->getTransform()->position.x = m_pBackground1->getWidth() + 400;
 
-	if (m_pBackground2->getTransform()->position.x <= -m_pBackground1->getWidth() + 400)
+	if (m_pBackground2->getTransform()->position.x <= -m_pBackground2->getWidth() + 400)
 		m_pBackground2->getTransform()->position.x = m_pBackground2->getWidth() + 400;
 }
 
@@ -249,6 +267,30 @@ void PlayScene::m_ForegroundScroll()
 		m_pForeground2->setForeground(randomNumber);
 		m_pForeground2->getTransform()->position.x = m_pForeground2->getWidth() + 400;
 	}
+}
+
+void PlayScene::m_MidGroundScroll()
+{
+	m_pMidGround1->getTransform()->position.x -= 1.75f;
+	m_pMidGround2->getTransform()->position.x -= 1.75f;
+
+	if (m_pMidGround1->getTransform()->position.x <= -m_pMidGround1->getWidth() + 400)
+		m_pMidGround1->getTransform()->position.x = m_pMidGround1->getWidth() + 400;
+
+	if (m_pMidGround2->getTransform()->position.x <= -m_pMidGround2->getWidth() + 400)
+		m_pMidGround2->getTransform()->position.x = m_pMidGround2->getWidth() + 400;
+}
+
+void PlayScene::m_ExtraScroll()
+{
+	m_pExtraScroll1->getTransform()->position.x -= 2.0f;
+	m_pExtraScroll2->getTransform()->position.x -= 2.0f;
+
+	if (m_pExtraScroll1->getTransform()->position.x <= -m_pExtraScroll1->getWidth() + 400)
+		m_pExtraScroll1->getTransform()->position.x = m_pExtraScroll1->getWidth() + 400;
+
+	if (m_pExtraScroll2->getTransform()->position.x <= -m_pExtraScroll2->getWidth() + 400)
+		m_pExtraScroll2->getTransform()->position.x = m_pExtraScroll2->getWidth() + 400;
 }
 
 void PlayScene::TimerCounter()
