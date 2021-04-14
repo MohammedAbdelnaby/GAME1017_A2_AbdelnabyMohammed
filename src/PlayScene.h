@@ -16,6 +16,7 @@
 #include "CollisionManager.h"
 #include "ForeGround.h"
 #include "Moon.h"
+#include "PauseScene.h"
 
 class PlayScene : public Scene
 {
@@ -34,6 +35,7 @@ public:
 	void m_CollisionUpdate();
 	void m_BackgroundScroll();
 	void m_ForegroundScroll();
+	void TimerCounter();
 private:
 	// IMGUI Function
 	void GUI_Function() const;
@@ -49,6 +51,10 @@ private:
 	Ground* m_pGround[2];
 	Player* m_pPlayer;
 	int randomNumber;
+	int cooldown = 40;
+	PauseScene* m_pPauseScene;
+	int m_TimerCounter;
+	Label* m_pTimer;
 };
 
 #endif /* defined (__PLAY_SCENE__) */
