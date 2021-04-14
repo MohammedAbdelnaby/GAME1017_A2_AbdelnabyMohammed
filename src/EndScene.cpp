@@ -14,6 +14,8 @@ EndScene::~EndScene()
 
 void EndScene::draw()
 {
+	TextureManager::Instance()->draw("EndsceneBackground", 0, 0, 0, 255, false);
+
 	drawDisplayList();
 }
 
@@ -42,24 +44,25 @@ void EndScene::handleEvents()
 
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_1))
 	{
-		TheGame::Instance()->changeSceneState(PLAY_SCENE);
+		TheGame::Instance()->changeSceneState(START_SCENE);
 	}
 }
 
 void EndScene::start()
 {
-	const SDL_Color blue = { 0, 0, 255, 255 };
-	m_label = new Label("END SCENE", "Dock51", 80, blue, glm::vec2(400.0f, 40.0f));
+	TextureManager::Instance()->load("../Assets/textures/EndsceneBackground.png", "EndsceneBackground");
+	const SDL_Color red = { 200, 0,0, 255 };
+	m_label = new Label("YOU LOST", "Dock51", 80, red, glm::vec2(400.0f, 100.0f));
 	m_label->setParent(this);
 	addChild(m_label);
 
 	// Restart Button
 	m_pRestartButton = new Button("../Assets/textures/restartButton.png", "restartButton", RESTART_BUTTON);
-	m_pRestartButton->getTransform()->position = glm::vec2(400.0f, 400.0f);
+	m_pRestartButton->getTransform()->position = glm::vec2(400.0f, 300.0f);
 	m_pRestartButton->addEventListener(CLICK, [&]()-> void
 	{
 		m_pRestartButton->setActive(false);
-		TheGame::Instance()->changeSceneState(PLAY_SCENE);
+		TheGame::Instance()->changeSceneState(START_SCENE);
 	});
 
 	m_pRestartButton->addEventListener(MOUSE_OVER, [&]()->void

@@ -228,8 +228,7 @@ void PlayScene::m_CollisionUpdate()
 	{
 		if (CollisionManager::AABBCheck(m_pPlayer, m_pObstacle))
 		{
-			//TheGame::Instance()->changeSceneState(END_SCENE);
-			std::cout << "yes";
+			TheGame::Instance()->changeSceneState(END_SCENE);
 		}
 	}
 }

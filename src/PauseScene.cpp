@@ -7,7 +7,7 @@ PauseScene::PauseScene()
 	setWidth(size.x);
 	setHeight(size.y);
 	getTransform()->position = glm::vec2(400.0f, 300.0f);
-	m_pResume = new Button("../Assets/textures/restartButton.png", "restartButton", RESUME_BUTTON);
+	m_pResume = new Button("../Assets/textures/resumeButton.png", "resumeButton", RESUME_BUTTON);
 	m_pResume->getTransform()->position = glm::vec2(400.0f, 300.0f);
 	m_pResume->addEventListener(CLICK, [&]()-> void
 		{
