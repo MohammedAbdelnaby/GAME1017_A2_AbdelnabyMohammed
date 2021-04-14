@@ -102,12 +102,12 @@ void PlayScene::handleEvents()
 	{
 		//m_pPlayer->setAngle(90);
 		m_pPlayer->getTransform()->position.y = 520.0f;
-		m_pPlayer->setAnimationState(PLAYER_RUN_RIGHT);
+		m_pPlayer->setAnimationState(PLAYER_SLIDE_RIGHT);
 	}
 	else
 	{
 		m_pPlayer->setAngle(0);
-		m_pPlayer->setAnimationState(PLAYER_IDLE_RIGHT);
+		m_pPlayer->setAnimationState(PLAYER_RUN_RIGHT);
 	}
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_SPACE) && m_pPlayer->getisGrounded())
 	{ 
