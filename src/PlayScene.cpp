@@ -76,17 +76,18 @@ void PlayScene::handleEvents()
 	{
 		m_pPlayer->move();
 		m_pPlayer->setCurrentDirection(glm::vec2(1.0f, m_pPlayer->getCurrentDirection().y));
+		m_pPlayer->setAnimationState(PLAYER_RUN_RIGHT);
 	}
 	else if (EventManager::Instance().isKeyDown(SDL_SCANCODE_S) && m_pPlayer->getisGrounded())
 	{
-		m_pPlayer->setAngle(90);
+		//m_pPlayer->setAngle(90);
 		m_pPlayer->getTransform()->position.y = 520.0f;
-		m_pPlayer->setAnimationState(PLAYER_IDLE_PRONE);
+		m_pPlayer->setAnimationState(PLAYER_RUN_RIGHT);
 	}
 	else
 	{
 		m_pPlayer->setAngle(0);
-		m_pPlayer->setAnimationState(PLAYER_RUN_RIGHT);
+		m_pPlayer->setAnimationState(PLAYER_IDLE_RIGHT);
 	}
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_SPACE) && m_pPlayer->getisGrounded())
 	{ 
